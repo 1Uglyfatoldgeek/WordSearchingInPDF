@@ -5,5 +5,5 @@ Entrer les mots et chercher dans le dossier des fichiers PDF, retour le nom de f
 
 输入单词，短句，在文件夹中多个pdf文件中查找。返回单词所在的文件名和页码.
 
-是的，je parles 3 languerages. Program created for my wife,jess. 是的，a ungly 肥宅 a quand une belle wife.
+是的，je parles 3 languerages. Program created for my wife,jess. 是的，a ungly 肥宅 a quand meme une belle wife.
 
