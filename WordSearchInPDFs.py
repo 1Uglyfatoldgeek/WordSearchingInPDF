@@ -1,4 +1,3 @@
-
 import pdfplumber
 import os
 import re
@@ -21,10 +20,10 @@ result= GetDataPath(path)
 FileList=result[0]
 DataFilePath=result[1]+"/"
 
-ListPage=[]
+DicFile={}
 
 def TextMatching(InputText):
-    DicFile={}
+    ListPage=[]
     for FileName in FileList:
         with pdfplumber.open(DataFilePath+FileName) as pdf:
             for i,pg in enumerate(pdf.pages):
@@ -32,9 +31,12 @@ def TextMatching(InputText):
                 matchObj=re.search(InputText,PdfText,re.I)
                 if matchObj:
                     ListPage.append(i+1)
-                    DicFile={FileName:ListPage}
+                    DicFile[FileName]=ListPage
+        
     if DicFile!={}:
-        print ("Le mot \"" + InputText + "\" dans le fichier avec les pages : ",DicFile)
+        for k,v in DicFile.items():
+            print ("Le mot \"" + InputText + "\" dans le fichier " + k +" avec les pages : \n",v)
+            
         DicFile.clear()
     else :
         print("Oups, rien trouvé dans les fichiers")
@@ -42,6 +44,6 @@ def TextMatching(InputText):
 while True:
     InputText = str(input ("Tapes ton mot, ma cherie jess\n =>"))
     TextMatching(InputText)
-    Answer=str(input ("Tapes \"N\" pour stopper, tapes n'importe quelle touche pour continuer ?\n =>"))
+    Answer=str(input ("Tapes \"N\" pour stopper, tapes n'importe quelle autres touches pour continuer ?\n =>"))
     if Answer=="N" or Answer=="n":
         break
