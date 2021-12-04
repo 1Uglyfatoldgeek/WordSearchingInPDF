@@ -1,8 +1,7 @@
-import pdfplumber
-import os
-import re
+from os import listdir
+from re import search,IGNORECASE as I
 from pdfplumber.utils import extract_text
-
+from pdfplumber import open as PdfOpen
 
 path="C://datafile"
 
@@ -10,7 +9,7 @@ path="C://datafile"
 def GetDataPath(Path):
         try :
             DataFilePath = Path
-            FileList=os.listdir(DataFilePath)
+            FileList=listdir(DataFilePath)
             return FileList,Path
         except :
                 DataFilePath = input("file path miss,Please entrer the file path\n =>")
@@ -25,10 +24,10 @@ DicFile={}
 def TextMatching(InputText):
     ListPage=[]
     for FileName in FileList:
-        with pdfplumber.open(DataFilePath+FileName) as pdf:
+        with PdfOpen(DataFilePath+FileName) as pdf:
             for i,pg in enumerate(pdf.pages):
                 PdfText= pdf.pages[i].extract_text()
-                matchObj=re.search(InputText,PdfText,re.I)
+                matchObj=search(InputText,PdfText,I)
                 if matchObj:
                     ListPage.append(i+1)
                     DicFile[FileName]=ListPage
